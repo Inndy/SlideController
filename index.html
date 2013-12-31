@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slide Controller</title>
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0" />
+  <style type="text/css">
+    html, body { margin: 0; padding: 0; height: 100%; }
+    button {
+      float: left;
+      width: 50%;
+      height: 100%;
+      font-size: 72pt;
+      font-weight: bold;
+      padding: 0;
+    }
+    .clear { clear: both; }
+  </style>
+</head>
+<body>
+  <button class="control-btn" data-key="left">L</button>
+  <button class="control-btn" data-key="right">R</button>
+  <div class="clear"></div>
+  <script type="text/javascript">
+    var buttons = document.querySelectorAll(".control-btn");
+    
+    function button_clicking (key) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "/" + key);
+      xhr.send();
+    }
+
+    for (var i = 0; i < buttons.length; i++)
+      buttons[i].addEventListener("click", function () {
+        button_clicking(this.getAttribute("data-key"));
+      });
+  </script>
+</body>
+</html>
