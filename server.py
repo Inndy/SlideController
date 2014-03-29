@@ -16,10 +16,10 @@ class Request:
         self.client = client
     
     def response(self, status, type, length, content):
-        self.client.send("HTTP/1.1 %s\r\nContent-Type: %s\r\nContent-Length: %d\r\n\r\n%s" % (status, type, length, content))
+        self.client.send("HTTP/1.1 %s\r\nConnection: Close\r\nContent-Type: %s\r\nContent-Length: %d\r\n\r\n%s" % (status, type, length, content))
     
-    def responseHTML(self, content):
-        self.response("200 OK", "text/html; charset=utf-8", len(content), content)
+    def responseHTML(self, content, status = "200 OK"):
+        self.response(status, "text/html; charset=utf-8", len(content), content)
 
 class ConnectionHandler:
     def __init__(self, client, client_address):
@@ -43,7 +43,7 @@ class ConnectionHandler:
             device.emit_click(uinput.KEY_RIGHT)
             req.responseHTML("right")
         else:
-            req.response("404 Not Found", "text/html", 5, "ERROR")
+            req.responseHTML("This page does not exists.", "404 Not Found")
         
         client.close()
 
@@ -76,6 +76,7 @@ def StartServer(ip = "0.0.0.0", port = 5555):
         exit(-1)
 
     try:
+        global device
         device = uinput.Device([uinput.KEY_LEFT, uinput.KEY_RIGHT])
     except OSError:
         print "** ROOT PERMISSION IS REQUIRED FOR THIS PROGRAM **"
