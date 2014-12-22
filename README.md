@@ -18,5 +18,8 @@ or
 
 `sudo easy_install python-uinput`
 
+## License
+
+This program released under [MIT License](LICENSE).
 
   [1]: http://tjjr.fi/sw/python-uinput/
