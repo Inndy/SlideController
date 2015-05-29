@@ -1,7 +1,7 @@
 Slide Controller
 ================
 
-This program can help you control your slides remotely on almost any Unix-liked OS.
+A slide controller (e.g. press arrow-key) for Linux system.
 
 ## How does it work?
 
